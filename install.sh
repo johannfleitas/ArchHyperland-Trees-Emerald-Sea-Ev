@@ -12,24 +12,45 @@ CONFIG_DEST="$HOME/.config"
 echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
 
-# 1. Paquetes
+
 sudo pacman -Rns --noconfirm kitty-shell-integration kitty-terminfo wofi 2>/dev/null || true
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm hyprland waybar alacritty starship
+sudo pacman -S --needed --noconfirm hyprland waybar alacritty starship git base-devel
 
-# 2. Configs a ~/.config
+if ! command -v yay >/dev/null 2>&1; then
+    echo "yay no está instalado, instalando yay desde AUR..."
+
+    YAY_DIR="$HOME/.cache/yay-install"
+    rm -rf "$YAY_DIR"
+    mkdir -p "$YAY_DIR"
+
+    git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
+    cd "$YAY_DIR"
+    makepkg -si --noconfirm
+
+    cd "$SCRIPT_DIR"
+    echo "yay instalado correctamente."
+else
+    echo "yay ya está instalado, omitiendo instalación."
+fi
+
+HELIUM_PKG="helium-browser-bin"
+
+echo "Instalando navegador $HELIUM_PKG con yay..."
+yay -S --needed --noconfirm "$HELIUM_PKG" || {
+    echo "ADVERTENCIA: No se pudo instalar el paquete '$HELIUM_PKG' con yay."
+}
+
 CONFIG_DIRS=("hypr" "waybar" "alacritty" "rofi")
 
 for dir in "${CONFIG_DIRS[@]}"; do
     SRC="$BASE_DIR/$dir"      # configs/hypr, configs/waybar, etc.
     DST="$CONFIG_DEST/$dir"   # ~/.config/hypr, ~/.config/waybar, etc.
 
-    # Siempre creamos la carpeta destino (por si la app no la crea sola)
     mkdir -p "$DST"
 
     if [ -d "$SRC" ]; then
         if [ "$(ls -A "$SRC")" ]; then
-            # Si quieres respetar cambios locales, deja -ru. Si quieres forzar, cambia a -r
             cp -ru "$SRC/"* "$DST/"
             echo "Copiado: $SRC --> $DST"
         else
@@ -40,7 +61,6 @@ for dir in "${CONFIG_DIRS[@]}"; do
     fi
 done
 
-# 3. Extras a /etc
 EXTRA_SRC=( "etc" )
 EXTRA_DST=( "/etc" )
 
@@ -61,4 +81,4 @@ for i in "${!EXTRA_SRC[@]}"; do
     fi
 done
 
-echo "Instalación y copia de configuraciones completada."
+echo "Instalación de paquetes y copia de configuraciones completada."
