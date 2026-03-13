@@ -5,7 +5,7 @@
 # y subirlas a un repositorio de GitHub.
 # -----------------------------------------------------------------------------
 
-# Salir inmediatamente si un comando falla
+# Salir inmediatamente si un comando falla fuap
 set -e
 
 # --- Colores para la salida ---
@@ -66,7 +66,7 @@ if [ -d ".git" ]; then
         # Crear un commit con fecha y hora
         COMMIT_MESSAGE="Actualización de configuraciones $(date +'%Y-%m-%d %H:%M:%S')"
         git commit -m "$COMMIT_MESSAGE"
-        echo -e "${GREEN}Commit creado: $COMMIT_MESSAGE${NC}"
+        echo -e "${GREEN}Commit creado: $COMMIT_MESSAGE${NsC}"
 
         # Subir cambios al repositorio remoto
         git push || { echo -e "${YELLOW}Error al hacer push. Revisa tu conexión o configuración de Git.${NC}"; exit 1; }
