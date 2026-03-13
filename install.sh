@@ -2,6 +2,7 @@
 
 # Instalar los paquetes necesarios
 echo "Actualizando el sistema e instalando paquetes necesarios..."
+sudo pacman -Rns --noconfirm kitty wofi eww 2>/dev/null || true
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm hyprland waybar alacritty starship
 
