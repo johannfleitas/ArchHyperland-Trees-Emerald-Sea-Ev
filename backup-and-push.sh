@@ -18,13 +18,20 @@ echo -e "${GREEN}--- Iniciando copia de seguridad de configuraciones ---${NC}"
 #Rutas de origen de mis config en hyperland
 CONFIGS=(
     "/etc/pacman.conf:configs/etc"
+    
+
     "$HOME/.config/hypr/hyprland.conf:configs/hyprland"
     "$HOME/.config/hypr/hyprpaper.conf:configs/hyprland"
-    "$HOME/.config/kitty/kitty.conf:configs/kitty"
+    "$HOME/.config/hypr/animations.conf:configs/hyprland"
+    "$HOME/.config/hypr/autostart.conf:configs/hyprland"
+    "$HOME/.config/hypr/windows.conf:configs/hyprland"
+    "$HOME/.config/hypr/windowrules.conf:configs/hyprland"
+    "$HOME/.config/hypr/keybinds.conf:configs/hyprland"
+    "$HOME/.config/hypr/hyprlock.conf:configs/hyprland"
+
+
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
     "$HOME/.config/waybar/style.css:configs/waybar"
-    "$HOME/.config/eww/eww.scss:configs/eww"
-    "$HOME/.config/eww/eww.yuck:configs/eww"
     "$HOME/.config/alacritty/alacritty.toml:configs/alacritty"
     "$HOME/.config/rofi/config.rasi:configs/rofi"
 )

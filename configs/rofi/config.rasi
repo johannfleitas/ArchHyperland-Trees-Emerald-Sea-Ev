@@ -45,7 +45,7 @@ banner {
     expand:                      false;
     padding:                     30px 0px 0px 0px; 
     border-radius:               24px 24px 0px 0px;
-    background-image:            url("/home/johann/img/wallpaper/onePiece.jpg", width);
+    background-image:            url("/home/johann/img/wallpaper/stormLight.jpg", width);
     background-color:            transparent;
     children:                    [ "inputbar" ];
 }
@@ -64,7 +64,7 @@ inputbar {
 
 listview {
     enabled:                     true;
-    expand:                      true; /* <--- LA LISTA OUPA EL RESTO */
+    expand:                      true; /* <--- LA LISTA OCUPA EL RESTO */
     columns:                     2;
     lines:                       4;    /* Ajusta este número según la altura total que desees */
     cycle:                       true;
