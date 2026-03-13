@@ -1,6 +1,6 @@
 [window]
 padding = { x = 5, y = 10 }
-opacity = 0.4
+opacity = 0.6
 decorations = "none"
 
 [colors.primary]
@@ -11,7 +11,7 @@ foreground = '#ffffff'
 black   = '#4b565c'
 red     = '#e67e80'
 green   = '#4ecd42'
-yellow  = '#dbbc7f'
+yellow  = '#f1f816'
 blue    = '#7fbbb3'
 magenta = '#d699b6'
 cyan   =  '#8199cf'
