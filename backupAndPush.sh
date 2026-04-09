@@ -9,10 +9,10 @@ NC='\033[0m'
 echo -e "${GREEN}--- Iniciando copia de seguridad de configuraciones ---${NC}"
 
 CONFIGS=(
-    "/etc/pacman.conf:configs/etc"
+    "/etc/pacman.conf:root/etc"
 
-    "/usr/share/sddm/themes/sugar-dark:configs/sddm"
-    "/etc/sddm.conf.d:configs/sddm"
+    "/usr/share/sddm/themes/sugar-dark:root/sddm"
+    "/etc/sddm.conf.d:root/sddm"
 
     "$HOME/.config/hypr/hyprland.conf:configs/hyprland"
     "$HOME/.config/hypr/animations.conf:configs/hyprland"
