@@ -20,7 +20,7 @@ PACMAN_APPS_INSTALL=(alacritty waybar starship rofi hyprpaper obsidian
 
 YAY_APPS=(helium-browser-bin eww)
 
-CONFIG_DIRS=(hypr waybar alacritty rofi)
+CONFIG_DIRS=(hyprland waybar alacritty rofi)
 
 
 to_remove=()
