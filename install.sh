@@ -15,7 +15,7 @@ PACMAN_APPS_UNINSTALL=(wofi)
 PACMAN_APPS_INSTALL=(alacritty waybar starship rofi hyprpaper obsidian 
                     pavucontrol polkit-kde-agent power-profiles-daemon 
                     brightnessctl unrar unzip firefox network-manager-applet
-                    debugedit fakeroot)
+                    debugedit fakeroot base-devel git)
 
 YAY_APPS=(helium-browser-bin eww)
 
