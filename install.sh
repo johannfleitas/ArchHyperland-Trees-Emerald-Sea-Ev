@@ -10,7 +10,7 @@ CONFIG_DEST="$HOME/.config"
 echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
 
-PACMAN_APPS_UNINSTALL=(kitty-shell-integration kitty-terminfo wofi)
+PACMAN_APPS_UNINSTALL=(wofi)
 
 PACMAN_APPS_INSTALL=(alacritty waybar starship rofi hyprpaper obsidian 
                     pavucontrol polkit-kde-agent power-profiles-daemon 
