@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 # --- Colores para la salida ---
@@ -11,7 +10,10 @@ echo -e "${GREEN}--- Iniciando copia de seguridad de configuraciones ---${NC}"
 
 CONFIGS=(
     "/etc/pacman.conf:configs/etc"
-    
+
+    "/usr/share/sddm/themes/sugar-dark:configs/sddm"
+    "/etc/sddm.conf.d:configs/sddm"
+
     "$HOME/.config/hypr/hyprland.conf:configs/hyprland"
     "$HOME/.config/hypr/animations.conf:configs/hyprland"
     "$HOME/.config/hypr/autostart.conf:configs/hyprland"
@@ -24,9 +26,9 @@ CONFIGS=(
 
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
     "$HOME/.config/waybar/style.css:configs/waybar"
-    
+
     "$HOME/.config/alacritty/alacritty.toml:configs/alacritty"
-    
+
     "$HOME/.config/rofi/config.rasi:configs/rofi"
 )
 
@@ -37,7 +39,12 @@ for entry in "${CONFIGS[@]}"; do
     mkdir -p "$DESTINO_DIR"
 
     echo "Copiando $(basename "$ORIGEN") a $DESTINO_DIR..."
-    cp -v "$ORIGEN" "$DESTINO_DIR/"
+
+    if [ -d "$ORIGEN" ]; then
+        cp -av "$ORIGEN" "$DESTINO_DIR/"
+    else
+        cp -v "$ORIGEN" "$DESTINO_DIR/"
+    fi
 done
 
 echo -e "\n${GREEN}¡Copia de seguridad local completada!${NC}"
@@ -53,7 +60,7 @@ if [ -d ".git" ]; then
     else
         COMMIT_MESSAGE="Actualización de configuraciones $(date +'%Y-%m-%d %H:%M:%S')"
         git commit -m "$COMMIT_MESSAGE"
-        echo -e "${GREEN}Commit creado: $COMMIT_MESSAGE${NsC}"
+        echo -e "${GREEN}Commit creado: $COMMIT_MESSAGE${NC}"
 
         git push || { echo -e "${YELLOW}Error al hacer push. Revisa tu conexión o configuración de Git.${NC}"; exit 1; }
         echo -e "\n${GREEN}¡Cambios subidos a GitHub exitosamente!${NC}"
@@ -61,4 +68,4 @@ if [ -d ".git" ]; then
 else
     echo -e "\n${YELLOW}AVISO: Esta carpeta no es un repositorio de Git.${NC}"
     echo "Para poder subir los cambios, primero inicializa Git y conéctalo a GitHub."
-fi 
+fi
