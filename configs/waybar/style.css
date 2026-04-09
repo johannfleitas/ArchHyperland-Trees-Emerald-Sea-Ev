@@ -12,21 +12,20 @@ window#waybar {
   color: #cdd6f4;
 }
 
+
 #workspaces button {
-    color: #94ecba;
+    color: #efcae2;
     padding: 0 4px;
     background: transparent;
     box-shadow: none;
     text-shadow: none;
     border: none;
-    border-radius: 0;
 }
 
 #workspaces button label {
-  font-size: 24px;
+  font-size: 18px;
 }
 
-/* Activo más grande */
 #workspaces button.active label {
   font-size: 18px;
 }
@@ -34,7 +33,6 @@ window#waybar {
 #workspaces button:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #13d165;
-    border-radius: 6px;
     box-shadow: none;
     text-shadow: none;
     transition: background 0.2s ease;
