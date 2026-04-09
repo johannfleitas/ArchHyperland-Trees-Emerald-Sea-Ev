@@ -4,48 +4,60 @@ configuration {
     display-drun:                "❯";
     drun-display-format:         "{name}";
     font:                        "JetBrainsMono Nerd Font 11";
-    
 }
 
 * {
-    background:                  #1e272df4; 
-    background-alt:              #1e272dff;
+    background:                  #40a870f4;
+    background-alt:              #42a840f4;
     foreground:                  #FFFFFFFF;
-    selected:                    #1e272dff; 
-    active:                      #3a49ecff;
-    urgent:                      #E34234ff;
+    selected:                    #04ff0037;
+    active:                      rgb(42, 130, 69);
+    urgent:                      rgb(231, 113, 39);
 }
 
+/* Ventana principal */
 window {
     transparency:                "real";
     location:                    north;
     anchor:                      center;
-    width:                       800px;
+    width:                       580px;
+
     enabled:                     true;
-    border-radius:               24px;
+    border-radius:               12px;
     background-color:            @background;
-    /* Forzamos que no haya nada de borde ni espacio externo */
-    y-offset:                    90px; 
+    y-offset:                    60px;
     x-offset:                    0px;
     border:                      0px;
     margin:                      0px;
     padding:                     0px;
 }
 
+/* Layout general: izquierda (contenido) + derecha (imagen) */
 mainbox {
     enabled:                     true;
+    orientation:                 horizontal;
+    spacing:                     0px;
+    padding:                     0px;
+    background-color:            transparent;
+    children:                    [ "content", "sideimage" ];
+}
+
+/* Columna izquierda */
+content {
+    enabled:                     true;
+    orientation:                 vertical;
     spacing:                     0px;
     padding:                     0px;
     background-color:            transparent;
     children:                    [ "banner", "listview" ];
 }
 
+/* Banner arriba (solo en la columna izquierda) */
 banner {
     enabled:                     true;
     expand:                      false;
-    padding:                     30px 0px 0px 0px; 
+    padding:                     30px -170px 0px -170px;
     border-radius:               24px 24px 0px 0px;
-    background-image:            url("/home/johann/img/wallpaper/stormLight.jpg", width);
     background-color:            transparent;
     children:                    [ "inputbar" ];
 }
@@ -54,19 +66,24 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     padding:                     10px 20px;
-    /* Margen superior e inferior pequeños para definir la altura fija del banner */
-    margin:                      2px 15% 20px 15%; 
+    margin:                      2px 15% 20px 15%;
     border-radius:               50px;
     background-color:            @selected;
     text-color:                  @foreground;
     children:                    [ "prompt", "entry" ];
 }
 
+entry {
+    placeholder:                "type to filter";
+    placeholder-color:          rgba(255, 255, 255, 0.55);
+}
+
+/* Lista de apps: SOLO IZQUIERDA (1 columna) */
 listview {
     enabled:                     true;
-    expand:                      true; /* <--- LA LISTA OCUPA EL RESTO */
-    columns:                     2;
-    lines:                       4;    /* Ajusta este número según la altura total que desees */
+    expand:                      true;
+    columns:                     1;
+    lines:                       8;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
@@ -78,12 +95,25 @@ listview {
     border:                      0px;
 }
 
+/* Columna derecha: SOLO imagen */
+sideimage {
+    enabled:                     true;
+    expand:                      false;
+    width:                       250px;
+    padding:                     0px;
+    margin:                      0px;
+    background-color:            transparent;
+    background-image:            url("/home/johann/pictures/tress_vertical.jpg", height);
+    border-radius:               0px 12px 12px 0px;
+}
+
+/* Estilos de los elementos */
 element {
     enabled:                     true;
     spacing:                     10px;
     padding:                     8px 12px;
     border-radius:               12px;
-    background-color:            transparent; /* Fondo base transparente */
+    background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
@@ -93,18 +123,15 @@ element normal.urgent,
 element normal.active,
 element alternate.normal,
 element alternate.urgent,
-
 element alternate.active {
     background-color:            transparent;
     text-color:                  @foreground;
 }
 
-/* Solo el que selecciones tendrá un color suave para saber dónde estás */
 element selected.normal,
 element selected.urgent,
-
 element selected.active {
-    background-color:            rgba(255, 255, 255, 0.1); /* Brillo sutil */
+    background-color:            rgba(255, 255, 255, 0.1);
     text-color:                  @foreground;
 }
 

@@ -13,7 +13,7 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #ffffff;
+    color: #94ecba;
     padding: 0 4px;
     background: transparent;
     box-shadow: none;
@@ -22,9 +22,18 @@ window#waybar {
     border-radius: 0;
 }
 
+#workspaces button label {
+  font-size: 24px;
+}
+
+/* Activo más grande */
+#workspaces button.active label {
+  font-size: 18px;
+}
+
 #workspaces button:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: #e5e9f0;
+    color: #13d165;
     border-radius: 6px;
     box-shadow: none;
     text-shadow: none;
@@ -32,43 +41,44 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: #ffeb0e;
+    color: #efcae2;
     font-size: 18px;
 }
 
 #workspaces button.urgent {
-    color: #bf616a;
+    color: #e84250;
 }
 
 /* --- MÓDULOS DE ESTADO --- */
-  #clock { color: #e5e9f0}
+  #clock { color: #efcae2}
 
-  /* Audio */
-    #pulseaudio {color: #ca0a1d}
-    #pulseaudio.zero {color: #a2aec1}
-    #pulseaudio.high {color: #e5bf80}
-
+  
   /* Temperatura */
-    #temperature {color: #d8d36b}
-    #temperature.critical {color: #ca0a1d}
-
+  #temperature {color: #efcae2}
+  #temperature.critical {color: #ca0a1d}
+  
   /* NetWork */
-    #network {color: #88c0d0}
-    #network.disconnected {color: #ca0a1d}
-    #network.disabled {color: #a2aec1}
-
+  #network {color: #efcae2}
+  #network.disconnected {color: #ca0a1d}
+  #network.disabled {color: #a2aec1}
+  
   /* Bateria */
-    #battery {color: #a2aec1}
-    #battery.warning {color: #f9b13d}
-    #battery.critical {color: #ca0a1d}
-
+  #battery {color: #efcae2}
+  #battery.warning {color: #f9853d}
+  #battery.critical {color: #390006}
+  
+  /* Audio */
+    #pulseaudio {color: #ca1f30}
+    #pulseaudio.zero {color: #72cf9a}
+    #pulseaudio.high {color: #efcae2}
+  
   /* Power-Profiles */
     #power-profiles-daemon.power-saver {color: #6ed561}
     #power-profiles-daemon.balanced {color: #6a4d9b}
     #power-profiles-daemon.performance {color: #ca1f30}
 
   /* Bluetooth */
-    #custom-bluetooth.enabled {color: #88c0d0}
+    #custom-bluetooth.enabled {color: #f6afdd}
     #custom-bluetooth.disabled {color: #aeb3bb}
 
   /* Spotify */
@@ -83,15 +93,30 @@ window#waybar {
     }
 
 /* --- ESTRUCTURA Y HOVER --- */
-  #workspaces, #clock, #pulseaudio, #custom-bluetooth, #temperature, 
-  #network, #battery, #power-profiles-daemon, #tray, #custom-spotify-tray {
+
+#workspaces, #clock, #custom-bluetooth, #temperature, 
+  #power-profiles-daemon, #tray, #custom-spotify-tray {
       padding: 0 8px;
   }
 
-  #clock:hover, #pulseaudio:hover, #custom-bluetooth:hover, #temperature:hover, 
-  #network:hover, #battery:hover, #power-profiles-daemon:hover, #custom-spotify-tray:hover {
+  #clock:hover, #custom-bluetooth:hover, #temperature:hover, #power-profiles-daemon:hover, #custom-spotify-tray:hover {
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 6px;
+  }
+  
+  #status {
+    padding: 0 6px 0 2px;
+    border-radius: 6px;
+  }
+
+  #status:hover{
+    background: rgba(255,255,255,0.10);
+  }
+  #pulseaudio{
+    padding: 0 16px 0 6px;
+  }
+  #battery {
+    padding: 0 8px;
   }
 
 

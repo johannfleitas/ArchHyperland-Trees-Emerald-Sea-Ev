@@ -1,10 +1,8 @@
 #!/bin/bash
-
-set -e
-
+set -euo pipefail
+ 
 echo "Actualizando el sistema e instalando paquetes necesarios..."
 
-# Obtener ruta real del script y BASE_DIR de configs
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$SCRIPT_DIR/configs"
 CONFIG_DEST="$HOME/.config"
@@ -12,73 +10,62 @@ CONFIG_DEST="$HOME/.config"
 echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
 
+PACMAN_APPS_UNINSTALL=(kitty-shell-integration kitty-terminfo wofi)
 
-sudo pacman -Rns --noconfirm kitty-shell-integration kitty-terminfo wofi 2>/dev/null || true
-sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm hyprland waybar alacritty starship git base-devel
+PACMAN_APPS_INSTALL=(alacritty waybar starship rofi hyprpaper obsidian 
+                    pavucontrol polkit-kde-agent power-profiles-daemon 
+                    brightnessctl unrar unzip firefox network-manager-applet)
 
-if ! command -v yay >/dev/null 2>&1; then
-    echo "yay no está instalado, instalando yay desde AUR..."
+YAY_APPS=(helium-browser-bin eww)
 
-    YAY_DIR="$HOME/.cache/yay-install"
-    rm -rf "$YAY_DIR"
-    mkdir -p "$YAY_DIR"
+CONFIG_DIRS=(hypr waybar alacritty rofi)
 
-    git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
-    cd "$YAY_DIR"
-    makepkg -si --noconfirm
 
-    cd "$SCRIPT_DIR"
-    echo "yay instalado correctamente."
+to_remove=()
+for pkg in "${PACMAN_APPS_UNINSTALL[@]}"; do
+  if pacman -Qi "$pkg" >/dev/null 2>&1; then
+    to_remove+=("$pkg")
+  fi
+done
+
+if ((${#to_remove[@]})); then
+  sudo pacman -Rns --noconfirm "${to_remove[@]}"
 else
-    echo "yay ya está instalado, omitiendo instalación."
+  echo "Nada para desinstalar (paquetes no instalados)."
 fi
 
-HELIUM_PKG="helium-browser-bin"
+sudo pacman -Syu --noconfirm
+sudo pacman -S --needed --noconfirm "${PACMAN_APPS_INSTALL[@]}"
 
-echo "Instalando navegador $HELIUM_PKG con yay..."
-yay -S --needed --noconfirm "$HELIUM_PKG" || {
-    echo "ADVERTENCIA: No se pudo instalar el paquete '$HELIUM_PKG' con yay."
-}
+if ! command -v yay >/dev/null 2>&1; then
+  echo "yay no está instalado, instalando yay desde AUR..."
+  YAY_DIR="$HOME/.cache/yay-install"
+  rm -rf "$YAY_DIR"
+  mkdir -p "$YAY_DIR"
+  git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
+  (cd "$YAY_DIR" && makepkg -si --noconfirm)
+fi
 
-CONFIG_DIRS=("hypr" "waybar" "alacritty" "rofi")
+if ((${#YAY_APPS[@]})); then
+  echo "Instalando AUR con yay: ${YAY_APPS[*]}..."
+  yay -S --needed --noconfirm "${YAY_APPS[@]}" || {
+    echo "ADVERTENCIA: No se pudo instalar uno o más paquetes AUR."
+  }
+fi
 
 for dir in "${CONFIG_DIRS[@]}"; do
-    SRC="$BASE_DIR/$dir"      # configs/hypr, configs/waybar, etc.
-    DST="$CONFIG_DEST/$dir"   # ~/.config/hypr, ~/.config/waybar, etc.
+  SRC="$BASE_DIR/$dir"
+  DST="$CONFIG_DEST/$dir"
 
+  if [ -d "$SRC" ] && [ "$(ls -A "$SRC" 2>/dev/null)" ]; then
     mkdir -p "$DST"
-
-    if [ -d "$SRC" ]; then
-        if [ "$(ls -A "$SRC")" ]; then
-            cp -ru "$SRC/"* "$DST/"
-            echo "Copiado: $SRC --> $DST"
-        else
-            echo "La carpeta $SRC está vacía, omitiendo copia..."
-        fi
-    else
-        echo "ADVERTENCIA: No existe $SRC en el repo, no hay configs propias para '$dir'."
-    fi
+    cp -ru "$SRC/"* "$DST/"
+    echo "Copiado: $SRC --> $DST"
+  elif [ -d "$SRC" ]; then
+    echo "La carpeta $SRC está vacía, omitiendo copia..."
+  else
+    echo "ADVERTENCIA: No existe $SRC en el repo, no hay configs propias para '$dir'."
+  fi
 done
 
-EXTRA_SRC=( "etc" )
-EXTRA_DST=( "/etc" )
-
-for i in "${!EXTRA_SRC[@]}"; do
-    SRC="$BASE_DIR/${EXTRA_SRC[i]}"   # configs/etc
-    DST="${EXTRA_DST[i]}"             # /etc
-
-    if [ -d "$SRC" ]; then
-        if [ "$(ls -A "$SRC")" ]; then
-            echo "Copiando $SRC --> $DST (requiere permisos de superusuario)"
-            sudo cp -ru "$SRC/"* "$DST/"
-            echo "Copiado: $SRC --> $DST"
-        else
-            echo "La carpeta $SRC está vacía, omitiendo copia..."
-        fi
-    else
-        echo "ADVERTENCIA: No existe $SRC en el repo, no se copia nada a $DST."
-    fi
-done
-
-echo "Instalación de paquetes y copia de configuraciones completada."
+echo "Listo."
