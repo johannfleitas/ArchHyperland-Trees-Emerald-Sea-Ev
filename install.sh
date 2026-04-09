@@ -5,7 +5,8 @@ echo "Actualizando el sistema e instalando paquetes necesarios..."
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$SCRIPT_DIR/configs"
-CONFIG_DEST="$HOME/.config"
+REAL_HOME="$(eval echo ~"${SUDO_USER:-$USER}")"
+CONFIG_DEST="$REAL_HOME/.config"
 
 echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
@@ -40,13 +41,13 @@ sudo pacman -S --needed --noconfirm "${PACMAN_APPS_INSTALL[@]}"
 
 if ! command -v yay >/dev/null 2>&1; then
   echo "yay no está instalado, instalando yay desde AUR..."
-  YAY_DIR="$HOME/.cache/yay-install"
+  mkdir -p "$REAL_HOME/.cache"
+  YAY_DIR="$REAL_HOME/.cache/yay-install"
   rm -rf "$YAY_DIR"
   mkdir -p "$YAY_DIR"
   git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
   (cd "$YAY_DIR" && makepkg -si --noconfirm)
 fi
-
 if ((${#YAY_APPS[@]})); then
   echo "Instalando AUR con yay: ${YAY_APPS[*]}..."
   yay -S --needed --noconfirm "${YAY_APPS[@]}" || {
@@ -54,16 +55,15 @@ if ((${#YAY_APPS[@]})); then
   }
 fi
 
+mkdir -p "$CONFIG_DEST"
 for dir in "${CONFIG_DIRS[@]}"; do
   SRC="$BASE_DIR/$dir"
   DST="$CONFIG_DEST/$dir"
 
-  if [ -d "$SRC" ] && [ "$(ls -A "$SRC" 2>/dev/null)" ]; then
+  if [ -d "$SRC" ]; then
     mkdir -p "$DST"
-    cp -ru "$SRC/"* "$DST/"
+    cp -a "$SRC/." "$DST/"
     echo "Copiado: $SRC --> $DST"
-  elif [ -d "$SRC" ]; then
-    echo "La carpeta $SRC está vacía, omitiendo copia..."
   else
     echo "ADVERTENCIA: No existe $SRC en el repo, no hay configs propias para '$dir'."
   fi
