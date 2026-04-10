@@ -7,20 +7,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$SCRIPT_DIR/configs"
 REAL_HOME="$(eval echo ~"${SUDO_USER:-$USER}")"
 CONFIG_DEST="$REAL_HOME/.config"
+ROOT_DIR="$SCRIPT_DIR/root"
+REAL_USER="${SUDO_USER:-$USER}"
 
 echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
 
 PACMAN_APPS_UNINSTALL=(wofi)
-
-PACMAN_APPS_INSTALL=(alacritty waybar starship rofi hyprpaper obsidian 
-                    pavucontrol polkit-kde-agent power-profiles-daemon 
-                    brightnessctl unrar unzip firefox network-manager-applet
-                    debugedit fakeroot base-devel git)
+PACMAN_APPS_FILE="$SCRIPT_DIR/Pacman.txt"
 
 YAY_APPS=(helium-browser-bin eww)
 
-CONFIG_DIRS=(hyprland waybar alacritty rofi)
+CONFIG_DIRS=(hypr waybar alacritty rofi)
 
 
 to_remove=()
@@ -36,21 +34,28 @@ else
   echo "Nada para desinstalar (paquetes no instalados)."
 fi
 
+if [[ ! -f "$PACMAN_APPS_FILE" ]]; then
+  echo "ERROR: No existe $PACMAN_APPS_FILE"
+  exit 1
+fi
+
+mapfile -t PACMAN_APPS_INSTALL < "$PACMAN_APPS_FILE"
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm "${PACMAN_APPS_INSTALL[@]}"
 
 if ! command -v yay >/dev/null 2>&1; then
   echo "yay no está instalado, instalando yay desde AUR..."
-  mkdir -p "$REAL_HOME/.cache"
+  sudo -u "$REAL_USER" mkdir -p "$REAL_HOME/.cache"
   YAY_DIR="$REAL_HOME/.cache/yay-install"
-  rm -rf "$YAY_DIR"
-  mkdir -p "$YAY_DIR"
-  git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
-  (cd "$YAY_DIR" && makepkg -si --noconfirm)
+  sudo -u "$REAL_USER" rm -rf "$YAY_DIR"
+  sudo -u "$REAL_USER" mkdir -p "$YAY_DIR"
+  sudo -u "$REAL_USER" git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
+  sudo -u "$REAL_USER" bash -lc "cd '$YAY_DIR' && makepkg -si --noconfirm"
 fi
+
 if ((${#YAY_APPS[@]})); then
   echo "Instalando AUR con yay: ${YAY_APPS[*]}..."
-  yay -S --needed --noconfirm "${YAY_APPS[@]}" || {
+  sudo -u "$REAL_USER" yay -S --needed --noconfirm "${YAY_APPS[@]}" || {
     echo "ADVERTENCIA: No se pudo instalar uno o más paquetes AUR."
   }
 fi
@@ -68,5 +73,30 @@ for dir in "${CONFIG_DIRS[@]}"; do
     echo "ADVERTENCIA: No existe $SRC en el repo, no hay configs propias para '$dir'."
   fi
 done
+
+echo "Instalando archivos de sistema desde $ROOT_DIR ..."
+
+if [[ -f "$ROOT_DIR/etc/pacman.conf" ]]; then
+  sudo install -Dm644 "$ROOT_DIR/etc/pacman.conf" /etc/pacman.conf
+  echo "Instalado: /etc/pacman.conf"
+else
+  echo "ADVERTENCIA: No existe $ROOT_DIR/etc/pacman.conf"
+fi
+
+if [[ -d "$ROOT_DIR/etc/sddm.conf.d" ]]; then
+  sudo mkdir -p /etc/sddm.conf.d
+  sudo cp -a "$ROOT_DIR/etc/sddm.conf.d/." /etc/sddm.conf.d/
+  echo "Instalado: /etc/sddm.conf.d/"
+else
+  echo "ADVERTENCIA: No existe $ROOT_DIR/etc/sddm.conf.d"
+fi
+
+if [[ -d "$ROOT_DIR/usr/share/sddm/themes/sugar-dark" ]]; then
+  sudo mkdir -p /usr/share/sddm/themes
+  sudo cp -a "$ROOT_DIR/usr/share/sddm/themes/sugar-dark" /usr/share/sddm/themes/
+  echo "Instalado: /usr/share/sddm/themes/sugar-dark"
+else
+  echo "ADVERTENCIA: No existe $ROOT_DIR/usr/share/sddm/themes/sugar-dark"
+fi
 
 echo "Listo."
