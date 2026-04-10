@@ -46,7 +46,6 @@ rust
 sddm
 sof-firmware
 starship
-steam
 tlp
 unrar
 unzip

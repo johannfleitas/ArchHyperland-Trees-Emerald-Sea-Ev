@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
- 
+trap 'echo "ERROR en línea $LINENO: comando: $BASH_COMMAND" >&2' ERR
+
 echo "Actualizando el sistema e instalando paquetes necesarios..."
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,8 +18,7 @@ PACMAN_APPS_UNINSTALL=(wofi)
 PACMAN_APPS_FILE="$SCRIPT_DIR/pacman.txt"
 
 YAY_APPS=(helium-browser-bin eww)
-
-CONFIG_DIRS=(hypr waybar alacritty rofi)
+CONFIG_DIRS=(hyprland waybar alacritty rofi)
 
 
 to_remove=()
