@@ -14,7 +14,7 @@ echo "Usando BASE_DIR = $BASE_DIR"
 echo "Instalando configuraciones en $CONFIG_DEST"
 
 PACMAN_APPS_UNINSTALL=(wofi)
-PACMAN_APPS_FILE="$SCRIPT_DIR/Pacman.txt"
+PACMAN_APPS_FILE="$SCRIPT_DIR/pacman.txt"
 
 YAY_APPS=(helium-browser-bin eww)
 
