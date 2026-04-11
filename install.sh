@@ -83,20 +83,21 @@ else
   echo "ADVERTENCIA: No existe $ROOT_DIR/etc/pacman.conf"
 fi
 
-if [[ -d "$ROOT_DIR/etc/sddm.conf.d" ]]; then
+if [[ -d "$ROOT_DIR/sddm/sddm.conf.d" ]]; then
   sudo mkdir -p /etc/sddm.conf.d
-  sudo cp -a "$ROOT_DIR/etc/sddm.conf.d/." /etc/sddm.conf.d/
+  sudo cp -a "$ROOT_DIR/sddm/sddm.conf.d/." /etc/sddm.conf.d/
   echo "Instalado: /etc/sddm.conf.d/"
 else
-  echo "ADVERTENCIA: No existe $ROOT_DIR/etc/sddm.conf.d"
+  echo "ADVERTENCIA: No existe $ROOT_DIR/sddm/sddm.conf.d"
 fi
 
-if [[ -d "$ROOT_DIR/usr/share/sddm/themes/sugar-dark" ]]; then
+if [[ -d "$ROOT_DIR/sddm/sugar-dark" ]]; then
   sudo mkdir -p /usr/share/sddm/themes
-  sudo cp -a "$ROOT_DIR/usr/share/sddm/themes/sugar-dark" /usr/share/sddm/themes/
+  sudo rm -rf /usr/share/sddm/themes/sugar-dark
+  sudo cp -a "$ROOT_DIR/sddm/sugar-dark" /usr/share/sddm/themes/
   echo "Instalado: /usr/share/sddm/themes/sugar-dark"
 else
-  echo "ADVERTENCIA: No existe $ROOT_DIR/usr/share/sddm/themes/sugar-dark"
+  echo "ADVERTENCIA: No existe $ROOT_DIR/sddm/sugar-dark"
 fi
 
 echo "Listo."

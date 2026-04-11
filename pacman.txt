@@ -51,6 +51,9 @@ sddm
 sof-firmware
 starship
 tlp
+ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
+ttf-nerd-fonts-symbols
 unrar
 unzip
 virt-manager
