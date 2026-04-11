@@ -113,7 +113,7 @@ fi
 
 if [[ -f "$HYPERPAPER_SCRIPT" ]]; then
   chmod +x "$HYPERPAPER_SCRIPT"
-  sudo -u "$REAL_USER" bash "$HYPERPAPER_SCRIPT"
+  bash "$HYPERPAPER_SCRIPT"
 else
   echo "ADVERTENCIA: No existe $HYPERPAPER_SCRIPT"
 fi
