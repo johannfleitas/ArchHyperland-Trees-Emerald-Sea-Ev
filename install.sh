@@ -9,6 +9,9 @@ BASE_DIR="$SCRIPT_DIR/configs"
 REAL_HOME="$(eval echo ~"${SUDO_USER:-$USER}")"
 CONFIG_DEST="$REAL_HOME/.config"
 ROOT_DIR="$SCRIPT_DIR/root"
+WALLPAPERS="$SCRIPT_DIR/wallpapers"
+WALLPAPERS_DEST="$REAL_HOME/pictures"
+HYPERPAPER_SCRIPT="$SCRIPT_DIR/hyprpaperConfiguration.sh"
 REAL_USER="${SUDO_USER:-$USER}"
 
 echo "Usando BASE_DIR = $BASE_DIR"
@@ -98,6 +101,22 @@ if [[ -d "$ROOT_DIR/sddm/sugar-dark" ]]; then
   echo "Instalado: /usr/share/sddm/themes/sugar-dark"
 else
   echo "ADVERTENCIA: No existe $ROOT_DIR/sddm/sugar-dark"
+fi
+
+if [[ -d "$WALLPAPERS" ]]; then
+  mkdir -p "$WALLPAPERS_DEST"
+  cp -a "$WALLPAPERS/." "$WALLPAPERS_DEST/"
+  chown -R "$REAL_USER:$REAL_USER" "$WALLPAPERS_DEST"
+  echo "Wallpapers copiados: $WALLPAPERS --> $WALLPAPERS_DEST"
+else
+  echo "ADVERTENCIA: No existe $WALLPAPERS"
+fi
+
+if [[ -f "$HYPERPAPER_SCRIPT" ]]; then
+  chmod +x "$HYPERPAPER_SCRIPT"
+  sudo -u "$REAL_USER" bash "$HYPERPAPER_SCRIPT"
+else
+  echo "ADVERTENCIA: No existe $HYPERPAPER_SCRIPT"
 fi
 
 echo "Listo."
