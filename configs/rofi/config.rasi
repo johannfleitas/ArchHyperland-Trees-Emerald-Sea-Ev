@@ -103,7 +103,7 @@ sideimage {
     padding:                     0px;
     margin:                      0px;
     background-color:            transparent;
-    background-image:            url("/home/johann/pictures/tress_vertical.jpg", height);
+    background-image:            url("~/pictures/tress_vertical.jpg", height);
     border-radius:               0px 12px 12px 0px;
 }
 
