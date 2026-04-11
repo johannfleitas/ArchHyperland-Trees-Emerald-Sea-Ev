@@ -10,7 +10,6 @@ REAL_HOME="$(eval echo ~"${SUDO_USER:-$USER}")"
 CONFIG_DEST="$REAL_HOME/.config"
 ROOT_DIR="$SCRIPT_DIR/root"
 WALLPAPERS="$SCRIPT_DIR/wallpapers"
-WALLPAPERS_DEST="$REAL_HOME/pictures"
 HYPERPAPER_SCRIPT="$SCRIPT_DIR/hyprpaperConfiguration.sh"
 REAL_USER="${SUDO_USER:-$USER}"
 
@@ -104,10 +103,10 @@ else
 fi
 
 if [[ -d "$WALLPAPERS" ]]; then
-  mkdir -p "$WALLPAPERS_DEST"
-  cp -a "$WALLPAPERS/." "$WALLPAPERS_DEST/"
-  chown -R "$REAL_USER:$REAL_USER" "$WALLPAPERS_DEST"
-  echo "Wallpapers copiados: $WALLPAPERS --> $WALLPAPERS_DEST"
+  mkdir -p "$REAL_HOME"
+  cp -a "$WALLPAPERS/." "$REAL_HOME/"
+  chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME"
+  echo "Wallpapers copiados: $WALLPAPERS --> $REAL_HOME"
 else
   echo "ADVERTENCIA: No existe $WALLPAPERS"
 fi
