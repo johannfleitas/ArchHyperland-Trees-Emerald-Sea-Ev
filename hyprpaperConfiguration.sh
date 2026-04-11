@@ -21,12 +21,23 @@ if ! command -v hyprctl >/dev/null 2>&1; then
   exit 1
 fi
 
-mapfile -t MONITORS < <(hyprctl monitors -j | jq -r '.[].name')
+MONITORS=()
+
+if command -v jq >/dev/null 2>&1; then
+  if hyprctl monitors -j 2>/dev/null | jq -e . >/dev/null 2>&1; then
+    mapfile -t MONITORS < <(hyprctl monitors -j 2>/dev/null | jq -r '.[].name')
+  fi
+fi
+
+if [[ ${#MONITORS[@]} -eq 0 ]]; then
+  mapfile -t MONITORS < <(hyprctl monitors 2>/dev/null | awk '/^Monitor /{print $2}')
+fi
 
 if [[ ${#MONITORS[@]} -eq 0 ]]; then
   echo "No se detectaron monitores con hyprctl." >&2
   exit 1
 fi
+
 
 mkdir -p "$CONF_DIR"
 

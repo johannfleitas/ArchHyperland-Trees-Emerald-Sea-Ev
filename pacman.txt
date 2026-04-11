@@ -23,6 +23,7 @@ hyprland
 hyprpaper
 inkscape
 intel-ucode
+jq
 libreoffice-fresh
 mbedtls
 mpv
