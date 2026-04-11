@@ -21,8 +21,8 @@ CONFIGS=(
     "$HOME/.config/hypr/windowrules.conf:configs/hyprland"
     "$HOME/.config/hypr/keybinds.conf:configs/hyprland"
     "$HOME/.config/hypr/hyprlock.conf:configs/hyprland"
-
     "$HOME/.config/hypr/hyprpaper.conf:configs/hyprland"
+    "$HOME/pictures:wallpapers"
 
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
     "$HOME/.config/waybar/style.css:configs/waybar"
