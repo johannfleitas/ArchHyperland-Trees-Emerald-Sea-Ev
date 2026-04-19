@@ -1,0 +1,28 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema_out.json",
+    "logo": {
+        "source": "/home/johann/Descargas/cosmere_oficial.png",
+        "type": "kitty",
+        "width": 28,
+        "height": 12,
+        "padding": { "top": 2}
+    },
+    "modules": [
+        "title",
+        "separator",
+        "os",
+        "host",
+        "kernel",
+        "uptime",
+        "packages",
+        "shell",
+        "display",
+        "wm",
+        "terminal",
+        "cpu",
+        "gpu",
+        "memory",
+        "break",
+        "colors"
+    ]
+}

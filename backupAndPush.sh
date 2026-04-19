@@ -35,7 +35,10 @@ CONFIGS=(
     # Barra de estado y terminal
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
     "$HOME/.config/waybar/style.css:configs/waybar"
-    "$HOME/.config/alacritty/alacritty.toml:configs/alacritty"
+    "$HOME/.config/kitty/kitty.conf/:configs/kitty"
+    "$HOME/.config/kitty/theme.conf/:configs/kitty"
+    "$HOME/.config/fastfetch/config.jsonc:configs/fastfetch"
+    "$HOME/.bashrc:home_files"
 
     # Lanzador de aplicaciones
     "$HOME/.config/rofi/config.rasi:configs/rofi"

@@ -6,6 +6,7 @@ echo "Actualizando el sistema e instalando paquetes necesarios..."
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$SCRIPT_DIR/configs"
+HOME_FILES_SRC="$SCRIPT_DIR/home_files"
 REAL_HOME="$(eval echo ~"${SUDO_USER:-$USER}")"
 CONFIG_DEST="$REAL_HOME/.config"
 ROOT_DIR="$SCRIPT_DIR/root"
@@ -75,6 +76,15 @@ for dir in "${CONFIG_DIRS[@]}"; do
     echo "ADVERTENCIA: No existe $SRC en el repo, no hay configs propias para '$dir'."
   fi
 done
+
+if [[ -d "$HOME_FILES_SRC" ]]; then
+  echo "Instalando archivos en la raíz de $REAL_HOME..."
+  cp -a "$HOME_FILES_SRC/." "$REAL_HOME/"
+  chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/."
+  echo "Copiado: $HOME_FILES_SRC --> $REAL_HOME"
+else
+  echo "ADVERTENCIA: No existe la carpeta $HOME_FILES_SRC en el repo."
+fi
 
 echo "Instalando archivos de sistema desde $ROOT_DIR ..."
 
