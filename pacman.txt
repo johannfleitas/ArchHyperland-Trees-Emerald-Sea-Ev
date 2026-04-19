@@ -13,7 +13,9 @@ discord
 dolphin
 dunst
 efibootmgr
+electron37
 fakeroot
+fastfetch
 git
 go
 godot
@@ -23,13 +25,16 @@ hyprpaper
 inkscape
 intel-ucode
 jq
+kitty
 libreoffice-fresh
 mbedtls
 mpv
 nano
 ncdu
+neovim
 network-manager-applet
 nlohmann-json
+noto-fonts-emoji
 nvm
 obsidian
 pavucontrol
