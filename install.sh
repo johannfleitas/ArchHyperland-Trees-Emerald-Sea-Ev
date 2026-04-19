@@ -80,7 +80,7 @@ done
 if [[ -d "$HOME_FILES_SRC" ]]; then
   echo "Instalando archivos en la raíz de $REAL_HOME..."
   cp -a "$HOME_FILES_SRC/." "$REAL_HOME/"
-  chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/."
+  sudo chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/."
   echo "Copiado: $HOME_FILES_SRC --> $REAL_HOME"
 else
   echo "ADVERTENCIA: No existe la carpeta $HOME_FILES_SRC en el repo."
@@ -115,7 +115,7 @@ fi
 if [[ -d "$WALLPAPERS" ]]; then
   mkdir -p "$REAL_HOME"
   cp -a "$WALLPAPERS/." "$REAL_HOME/"
-  chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME"
+  sudo chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME"
   echo "Wallpapers copiados: $WALLPAPERS --> $REAL_HOME"
 else
   echo "ADVERTENCIA: No existe $WALLPAPERS"
