@@ -30,7 +30,7 @@ CONFIGS=(
     "$HOME/.config/hypr/hyprlock.conf:configs/hyprland"
     
     # Fondos de pantalla
-    "$HOME/pictures:wallpapers"
+    "$HOME/wallpaper:wallpapers"
 
     # Barra de estado y terminal
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
