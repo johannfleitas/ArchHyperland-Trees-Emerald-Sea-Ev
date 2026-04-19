@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WALLPAPER_REL="pictures/trenza.png"
+WALLPAPER_REL="wallpaper/trenza.png"
 FIT_MODE="cover"
 SPLASH="false"
 
