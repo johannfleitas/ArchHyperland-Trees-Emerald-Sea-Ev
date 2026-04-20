@@ -20,7 +20,7 @@ echo "Instalando configuraciones en $CONFIG_DEST"
 PACMAN_APPS_UNINSTALL=(wofi)
 PACMAN_APPS_FILE="$SCRIPT_DIR/pacman.txt"
 
-YAY_APPS=(helium-browser-bin eww)
+YAY_APPS=(helium-browser-bin)
 CONFIG_DIRS=(hyprland waybar alacritty rofi)
 
 
