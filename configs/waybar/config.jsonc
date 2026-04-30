@@ -1,6 +1,10 @@
 {
   "layer": "top",
   "position": "top",
+  "margin-top": 6,
+  "margin-right": 7,
+  "margin-bottom": 0,
+  "margin-left": 7,
   "height": 36,
   "spacing": 5,
 
@@ -47,15 +51,6 @@
     }
 },
 
-// "custom/spotify-tray": {
-//     "format": "{}",
-//     "return-type": "json",
-//     "interval": 2,
-//     "exec": "pgrep -x spotify > /dev/null && echo '{\"text\": \"\", \"class\": \"running\"}' || echo '{\"text\": \"\", \"class\": \"stopped\"}'",
-//     "on-click": "hyprctl dispatch workspace 5",
-//     "on-click-right": "pkill spotify",
-//     "tooltip": false
-//   },
 
   "custom/bluetooth": {
     "format": "{}",

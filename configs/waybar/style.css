@@ -6,8 +6,13 @@
 }
 
 window#waybar {
-  background: rgba(20, 20, 24, 0.35); /* semitransparente para que se vea el blur */
-  border: none;
+  background: rgba(20, 20, 24, 0.35);
+  border: 1px solid rgba(205, 214, 244, 0.15);
+  border-radius: 14px;
+  
+  margin: 6px 10px 0px 20px; 
+  
+  padding: 6px 10px;
   box-shadow: none;
   color: #cdd6f4;
 }
@@ -33,6 +38,8 @@ window#waybar {
 #workspaces button:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #13d165;
+    margin: 3px 2px 3px 2px;
+    border-radius: 10px;
     box-shadow: none;
     text-shadow: none;
     transition: background 0.2s ease;
@@ -79,16 +86,6 @@ window#waybar {
     #custom-bluetooth.enabled {color: #f6afdd}
     #custom-bluetooth.disabled {color: #aeb3bb}
 
-  /* Spotify */
-    #custom-spotify-tray {
-       color: #1db954;
-       font-size: 16px;
-    }
-    #custom-spotify-tray.stopped {
-       padding: 0;
-       margin: 0;
-       font-size: 0;
-    }
 
 /* --- ESTRUCTURA Y HOVER --- */
 
@@ -99,12 +96,14 @@ window#waybar {
 
   #clock:hover, #custom-bluetooth:hover, #temperature:hover, #power-profiles-daemon:hover, #custom-spotify-tray:hover {
       background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
+      margin: 3px 3px;
+      border-radius: 14px;
   }
   
   #status {
     padding: 0 6px 0 2px;
-    border-radius: 6px;
+    margin: 3px 3px;
+    border-radius: 14px;
   }
 
   #status:hover{
@@ -120,8 +119,9 @@ window#waybar {
 
 /* --- CALENDARIO DESPLEGABLE --- */
 tooltip {
-    background-color: rgba(20, 20, 24, 0.95);
-    border: 1px solid #74c0e9;
+    background-color: rgba(34, 49, 40, 0.95);
+    border: 1px solid #5ac488;
+    border-radius: 14px;
 }
 tooltip label {
     font-size: 15px; 
