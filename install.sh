@@ -21,7 +21,7 @@ PACMAN_APPS_UNINSTALL=(wofi)
 PACMAN_APPS_FILE="$SCRIPT_DIR/pacman.txt"
 
 YAY_APPS=(helium-browser-bin)
-CONFIG_DIRS=(hyprland waybar alacritty rofi)
+CONFIG_DIRS=(hypr waybar alacritty rofi)
 
 
 to_remove=()

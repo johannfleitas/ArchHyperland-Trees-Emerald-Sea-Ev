@@ -21,13 +21,13 @@ CONFIGS=(
     "/etc/sddm.conf.d:root/sddm"
 
     # Entorno de escritorio (Ejemplo: Hyprland)
-    "$HOME/.config/hypr/hyprland.conf:configs/hyprland"
-    "$HOME/.config/hypr/animations.conf:configs/hyprland"
-    "$HOME/.config/hypr/autostart.conf:configs/hyprland"
-    "$HOME/.config/hypr/windows.conf:configs/hyprland"
-    "$HOME/.config/hypr/windowrules.conf:configs/hyprland"
-    "$HOME/.config/hypr/keybinds.conf:configs/hyprland"
-    "$HOME/.config/hypr/hyprlock.conf:configs/hyprland"
+    "$HOME/.config/hypr/hyprland.conf:configs/hypr"
+    "$HOME/.config/hypr/animations.conf:configs/hypr"
+    "$HOME/.config/hypr/autostart.conf:configs/hypr"
+    "$HOME/.config/hypr/windows.conf:configs/hypr"
+    "$HOME/.config/hypr/windowrules.conf:configs/hypr"
+    "$HOME/.config/hypr/keybinds.conf:configs/hypr"
+    "$HOME/.config/hypr/hyprlock.conf:configs/hypr"
     
     # Fondos de pantalla
     "$HOME/wallpaper:wallpapers"
