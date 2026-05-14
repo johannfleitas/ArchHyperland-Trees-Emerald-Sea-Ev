@@ -15,42 +15,38 @@
     "custom/bluetooth",
     "power-profiles-daemon",
     "group/status",
-    "tray"
+    "tray",
   ],
 
   "group/status": {
-  "orientation": "inherit",
-  "modules": [
-    "pulseaudio",
-    "network",
-    "battery"
-  ]
-},
+    "orientation": "inherit",
+    "modules": ["pulseaudio", "network", "battery"],
+  },
 
-"hyprland/workspaces": {
+  "hyprland/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
     "all-outputs": true,
     "persistent-workspaces": {
-        "*": 5
+      "*": 5,
     },
     "format-icons": {
-        "active": "󰨐",
-        "default": "•"
-    }
-},
+      "active": "󰨐",
+      "occupied": "󱓜",
+      "default": "•",
+    },
+  },
 
-"clock": {
+  "clock": {
     "format": "{:%H:%M}",
     "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
-        "mode": "month",
-        "format": {
-            "today": "<span color='#bf616a'><b><u>{}</u></b></span>"
-        }
-    }
-},
-
+      "mode": "month",
+      "format": {
+        "today": "<span color='#bf616a'><b><u>{}</u></b></span>",
+      },
+    },
+  },
 
   "custom/bluetooth": {
     "format": "{}",
@@ -59,36 +55,35 @@
     "return-type": "json",
     "on-click": "rfkill unblock bluetooth && sleep 0.1 && (bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on)",
     "on-click-right": "blueman-manager &",
-    "tooltip": false
+    "tooltip": false,
   },
 
   "temperature": {
     "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 75,
     "format": "{icon} {temperatureC}°C",
-    "format-icons": ["", "", ""]
+    "format-icons": ["", "", ""],
   },
 
-  
   "pulseaudio": {
     "format": "{icon}",
     "format-icons": { "default": ["", "", ""] },
     "on-click": "pavucontrol",
-    "states":{
+    "states": {
       "zero": 0,
-      "high": 80 
-    }
+      "high": 80,
+    },
   },
 
-"network": {
+  "network": {
     "format-wifi": " ",
     "format-ethernet": "󰈀",
-    "format-disconnected": "󰖪", 
+    "format-disconnected": "󰖪",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
     "tooltip-format-wifi": "SSID: {essid}\nSeñal: {signalStrength}%",
     "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}",
     "tooltip-format-disconnected": "Desconectado",
-    "on-click": "nm-connection-editor"
+    "on-click": "kitty -e nmtui",
   },
 
   "battery": {
@@ -97,7 +92,7 @@
     "format": "{icon}",
     "format-charging": " {icon} {capacity}%",
     "format-plugged": " {icon} {capacity}%",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["", "", "", "", ""],
   },
 
   "power-profiles-daemon": {
@@ -106,12 +101,12 @@
     "format-icons": {
       "performance": "󰓅",
       "balanced": "󰾅",
-      "power-saver": "󰾆"
-    }
+      "power-saver": "󰾆",
+    },
   },
 
   "tray": {
     "icon-size": 18,
-    "spacing": 5
-  }
+    "spacing": 5,
+  },
 }

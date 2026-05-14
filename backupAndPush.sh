@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 # Evitamos usar 'set -e' de forma global para poder manejar los errores de copia nosotros mismos
 
 # --- Colores para la salida ---
@@ -21,14 +21,14 @@ CONFIGS=(
     "/etc/sddm.conf.d:root/sddm"
 
     # Entorno de escritorio (Ejemplo: Hyprland)
-    "$HOME/.config/hypr/hyprland.conf:configs/hypr"
-    "$HOME/.config/hypr/animations.conf:configs/hypr"
-    "$HOME/.config/hypr/autostart.conf:configs/hypr"
-    "$HOME/.config/hypr/windows.conf:configs/hypr"
-    "$HOME/.config/hypr/windowrules.conf:configs/hypr"
-    "$HOME/.config/hypr/keybinds.conf:configs/hypr"
+    "$HOME/.config/hypr/hyprland.lua:configs/hypr"
+    "$HOME/.config/hypr/animations.lua:configs/hypr"
+    "$HOME/.config/hypr/autostart.lua:configs/hypr"
+    "$HOME/.config/hypr/rules.lua:configs/hypr"
+    "$HOME/.config/hypr/keybinds.lua:configs/hypr"
     "$HOME/.config/hypr/hyprlock.conf:configs/hypr"
-    
+    "$HOME/.config/hypr/theme.lua:configs/hypr"
+
     # Fondos de pantalla
     "$HOME/wallpaper:wallpapers"
 
@@ -36,7 +36,7 @@ CONFIGS=(
     "$HOME/.config/waybar/config.jsonc:configs/waybar"
     "$HOME/.config/waybar/style.css:configs/waybar"
     "$HOME/.config/kitty/kitty.conf:configs/kitty"
-    "$HOME/.config/kitty/theme.conf:configs/kitty" 
+    "$HOME/.config/kitty/theme.conf:configs/kitty"
     "$HOME/.config/fastfetch/config.jsonc:configs/fastfetch"
     "$HOME/.bashrc:home_files"
 

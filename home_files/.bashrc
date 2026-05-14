@@ -7,5 +7,6 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias zed="zeditor"
 PS1='\[\e[1;36m\]╭─[\u@\h \W]\n\[\e[1;36m\]╰─ \[\e[0m\]'
 fastfetch
